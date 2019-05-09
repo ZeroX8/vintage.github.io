@@ -37,6 +37,7 @@ class Control {
     }
     
     mouseLeave() {
+        this.clicked = false;
         this.mouseEntered = false;
     }
 
