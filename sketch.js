@@ -20,8 +20,9 @@ function setup() {
 
 function draw() {
     background(51);
-    main.show();
-    msgBox.show();
+    for (let window of windows) {
+        window.show();
+    }
 }
 
 function windowResized() {
@@ -29,34 +30,38 @@ function windowResized() {
 }
 
 function mouseMoved() {
-    for (let i = 0; i < windows.length; i++) {
-        if (windows[i].overlaps(mouseX, mouseY)) {
-            windows[i].mouseMove();
+    for (let window of windows) {
+        if (window.overlaps(mouseX, mouseY)) {
+            window.mouseMove();
         }
     }
     
 }
 
 function mouseDragged() {
-    for (let i = 0; i < windows.length; i++) {
-        if (windows[i].shouldDrag) {
-            windows[i].mouseMove();
+    for (let window of windows) {
+        if (window.shouldDrag) {
+            window.mouseMove();
+        } else {
+            if (window.overlaps(mouseX, mouseY)) {
+                window.mouseMove();
+            }
         }
     }
 }
 
 function mousePressed() {
-    for (let i = 0; i < windows.length; i++) {
-        if (windows[i].overlaps(mouseX, mouseY)) {
-            windows[i].mouseDown(mouseButton);
+    for (let window of windows) {
+        if (window.overlaps(mouseX, mouseY)) {
+            window.mouseDown(mouseButton);
         }
     }
 }
 
 function mouseReleased() {
-    for (let i = 0; i < windows.length; i++) {
-        if (windows[i].overlaps(mouseX, mouseY)) {
-            windows[i].mouseUp(mouseButton);
+    for (let window of windows) {
+        if (window.overlaps(mouseX, mouseY)) {
+            window.mouseUp(mouseButton);
         }
     }
 }

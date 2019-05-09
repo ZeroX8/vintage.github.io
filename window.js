@@ -14,11 +14,11 @@ class Window extends Control {
         },
         (button) => {
             this.visible = false;
-        });
+        }, texClose);
     }
 
-    addButton(x, y, w, h, name, caption, mouseDownFunc, mouseUpFunc) {
-        this.controls.push(new Button(x, y, w, h, name, caption, this, false, mouseDownFunc, mouseUpFunc));
+    addButton(x, y, w, h, name, caption, mouseDownFunc, mouseUpFunc, tex = null) {
+        this.controls.push(new Button(x, y, w, h, name, caption, this, false, mouseDownFunc, mouseUpFunc, tex));
     }
 
     show() {
@@ -35,13 +35,13 @@ class Window extends Control {
     mouseMove() {
         if (this.shouldDrag)
             this.move(mouseX - this.offset.x, mouseY - this.offset.y);
-        for (let i = 0; i < this.controls.length; i++) {
-            if (this.controls[i].overlaps(mouseX, mouseY)) {
-                if (!this.controls[i].mouseEntered)
-                    this.controls[i].mouseEnter();
+        for (let control of this.controls) {
+            if (control.overlaps(mouseX, mouseY)) {
+                if (!control.mouseEntered)
+                control.mouseEnter();
             } else {
-                if (this.controls[i].mouseEntered)
-                    this.controls[i].mouseLeave();
+                if (control.mouseEntered)
+                control.mouseLeave();
             }
         }
     }
@@ -52,18 +52,18 @@ class Window extends Control {
             this.offset.x = mouseX - this.position.x;
             this.offset.y = mouseY - this.position.y;
         }
-        for (let i = 0; i < this.controls.length; i++) {
-            if (this.controls[i].overlaps(mouseX, mouseY)) {
-                this.controls[i].mouseDown(button);
+        for (let control of this.controls) {
+            if (control.overlaps(mouseX, mouseY)) {
+                control.mouseDown(button);
             }
         }
     }
 
     mouseUp(button) {
         this.shouldDrag = false;
-        for (let i = 0; i < this.controls.length; i++) {
-            if (this.controls[i].overlaps(mouseX, mouseY)) {
-                this.controls[i].mouseUp(button);
+        for (let control of this.controls) {
+            if (control.overlaps(mouseX, mouseY)) {
+                control.mouseUp(button);
             }
         }
     }

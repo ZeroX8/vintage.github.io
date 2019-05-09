@@ -1,5 +1,5 @@
 class Control {
-    constructor(x, y, w, h, title, caption, par, centered) {
+    constructor(x, y, w, h, title, caption, par, centered, tex = null) {
         this.par = par;
         this.centered = centered;
         this.position = {x: x, y: y};
@@ -13,6 +13,7 @@ class Control {
         this.backColor = color(255);
         this.defaultColor = color(255);
         this.border = true;
+        this.texture = tex;
     }
 
     show() {

@@ -1,6 +1,6 @@
 class Button extends Control {
-    constructor(x, y, w, h, title, caption, par, centered, mouseDownFunc, mouseUpFunc) {
-        super(x, y, w, h, title, caption, par, centered);
+    constructor(x, y, w, h, title, caption, par, centered, mouseDownFunc, mouseUpFunc, tex = null) {
+        super(x, y, w, h, title, caption, par, centered, tex);
         this.hoverColor = color(128);
         this.clickedColor = color(96);
         this.targetColor = this.backColor;
@@ -32,8 +32,12 @@ class Button extends Control {
             this.targetColor = this.clickedColor;
             //fill(this.clickedColor);
         this.backColor = lerpColor(this.backColor, this.targetColor, 0.2);
-        fill(this.backColor);
-        rect(x_off, y_off, this.size.w, this.size.h);
+        if (this.texture == null) {
+            fill(this.backColor);
+            rect(x_off, y_off, this.size.w, this.size.h);
+        } else {
+            image(x_off, y_off, this.size.w, this.size.h);
+        }
         pop();
         push();
         fill(0);

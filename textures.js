@@ -1,5 +1,1 @@
-var texClose;
-
-function loadTextures() {
-    texClose = loadImage("./images/buttonClose.png");
-}
+const texClose = loadImage("./images/buttonClose.png");
